@@ -22,7 +22,6 @@
             android:layout_height="wrap_content"
             android:contentDescription="Ballot Image"
             android:src="@drawable/ballot_logo"
-            android:onClick="@{()-> viewModel.onUpcomingElectionsButtonClicked()}"
             app:layout_constraintBottom_toBottomOf="@id/upcomingButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Upcoming Elections"
-            android:onClick="@{()-> viewModel.onRepresentativeButtonClicked()}"
+            android:onClick="@{()-> viewModel.onUpcomingElectionsButtonClicked()}"
             app:layout_constraintBottom_toTopOf="@id/representativeButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -47,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Find my Representative"
+            android:onClick="@{()-> viewModel.onRepresentativeButtonClicked()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
