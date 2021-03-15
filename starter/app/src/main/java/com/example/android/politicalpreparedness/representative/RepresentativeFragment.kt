@@ -6,11 +6,19 @@ import android.location.Location
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.android.politicalpreparedness.R
+import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Address
 import java.util.Locale
 
 class DetailFragment : Fragment() {
+
+    private lateinit var binding: FragmentRepresentativeBinding
+    private lateinit var viewModel: RepresentativeViewModel
+
 
     companion object {
         //TODO: Add Constant for Location request
@@ -22,6 +30,12 @@ class DetailFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_representative, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        viewModel = ViewModelProvider(this).get(RepresentativeViewModel::class.java)
+        binding.representativeViewModel = viewModel
+
         //TODO: Establish bindings
 
         //TODO: Define and assign Representative adapter
@@ -29,6 +43,8 @@ class DetailFragment : Fragment() {
         //TODO: Populate Representative adapter
 
         //TODO: Establish button listeners for field and location search
+
+        return binding.root
 
     }
 
@@ -48,6 +64,7 @@ class DetailFragment : Fragment() {
 
     private fun isPermissionGranted() : Boolean {
         //TODO: Check if permission is already granted and return (true = granted, false = denied/other)
+        return true
     }
 
     private fun getLocation() {

@@ -4,6 +4,13 @@
     xmlns:motion="http://schemas.android.com/tools">
 
     <!-- TODO: Add data binding node -->
+    <data>
+
+        <variable
+            name="representativeViewModel"
+            type="com.example.android.politicalpreparedness.representative.RepresentativeViewModel" />
+
+    </data>
 
     <!-- TODO: Add motion scene to hide form on vertical scroll. -->
     <androidx.constraintlayout.motion.widget.MotionLayout
