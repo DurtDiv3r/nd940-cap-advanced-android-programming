@@ -27,15 +27,12 @@ class LaunchFragment : Fragment() {
         binding.upcomingButton.setOnClickListener { navToElections() }
 
         viewModel.navigateToFragment.observe(viewLifecycleOwner) {
-            when (it) {
-                ElectionsFragment::class.java.simpleName -> {
-                    navToElections()
-                    viewModel.navigateToFragmentDone()
-                }
-                DetailFragment::class.java.simpleName -> {
-                    navToRepresentatives()
-                    viewModel.navigateToFragmentDone()
-                }
+            if (it == ElectionsFragment::class.java.simpleName) {
+                navToElections()
+                viewModel.navigateToFragmentDone()
+            } else if (it == DetailFragment::class.java.simpleName) {
+                navToRepresentatives()
+                viewModel.navigateToFragmentDone()
             }
         }
 
@@ -49,5 +46,4 @@ class LaunchFragment : Fragment() {
     private fun navToRepresentatives() {
         this.findNavController().navigate(LaunchFragmentDirections.actionLaunchFragmentToRepresentativeFragment())
     }
-
 }
