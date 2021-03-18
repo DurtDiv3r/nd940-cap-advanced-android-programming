@@ -29,12 +29,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/upcoming_elections_recycler"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upcoming_elections_title" />
+            app:layout_constraintTop_toBottomOf="@id/upcoming_elections_title"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/election_item"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/saved_elections_title"
+            android:text="Saved Elections"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upcoming_elections_recycler" />
 
@@ -42,6 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/saved_elections_recycler"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/election_item"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/saved_elections_title" />
         <!-- TODO: Add Upcoming Election Recycler and Header -->

@@ -5,7 +5,8 @@
 
     <!-- TODO: Add data binding node for Voter Info ViewModel -->
     <data>
-
+        <import type="android.text.TextUtils" />
+        <import type="android.view.View" />
         <variable
             name="viewModel"
             type="com.example.android.politicalpreparedness.election.VoterInfoViewModel" />
@@ -22,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/default_padding"
+            app:title="@{viewModel.election.name}"
             android:singleLine="true"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_padding"
             app:layout_constraintTop_toBottomOf="@id/election_name"
+            android:text="@{viewModel.election.electionDay.toString()}"
             tools:text="12 November 2055" />
 
         <!-- TODO: Add visual styling and content -->
@@ -40,7 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/election_date"
-            app:layout_constraintTop_toBottomOf="@id/election_date" />
+            app:layout_constraintTop_toBottomOf="@id/election_date"
+            android:text="Election Information" />
 
         <!-- TODO: Add click binding to open web URL -->
         <!-- TODO: Add visual styling and content -->
@@ -48,6 +52,9 @@
             android:id="@+id/state_locations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.getVoterUrl(viewModel.voterInfo.state[0].electionAdministrationBody.votingLocationFinderUrl)}"
+            android:text="Voting Location"
+            android:visibility='@{TextUtils.isEmpty(viewModel.voterInfo.state[0].electionAdministrationBody.votingLocationFinderUrl) ? View.GONE : View.VISIBLE}'
             app:layout_constraintStart_toStartOf="@id/election_date"
             app:layout_constraintTop_toBottomOf="@id/state_header" />
 
@@ -58,7 +65,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/election_date"
-            app:layout_constraintTop_toBottomOf="@id/state_locations" />
+            app:layout_constraintTop_toBottomOf="@id/state_locations"
+            android:onClick="@{()->viewModel.getVoterUrl(viewModel.voterInfo.state[0].electionAdministrationBody.electionInfoUrl)}"
+            android:text="ballot Information" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/address_group"
@@ -72,7 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/election_date"
-            app:layout_constraintTop_toBottomOf="@id/state_ballot" />
+            app:layout_constraintTop_toBottomOf="@id/state_ballot"
+            android:text="Corresponding address" />
 
         <!-- TODO: Add data binding -->
         <TextView
@@ -80,9 +90,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/election_date"
-            app:layout_constraintTop_toBottomOf="@id/state_correspondence_header" />
+            app:layout_constraintTop_toBottomOf="@id/state_correspondence_header"
+            android:text="@{viewModel.voterInfo.state.get(0).electionAdministrationBody.correspondenceAddress.toFormattedString()}"
+            android:visibility="@{TextUtils.isEmpty(viewModel.voterInfo.state.get(0).electionAdministrationBody.correspondenceAddress.toFormattedString()) ? View.GONE : View.VISIBLE}" />
 
-        <!-- TODO: Add button to save election to Room -->
+        <Button
+            android:id="@+id/follow_election"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="@{() -> viewModel.isElectionFollowed(viewModel.election)}"
+            android:text="@{viewModel.election.isElectionSaved ? @string/unfollow_election : @string/follow_election}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

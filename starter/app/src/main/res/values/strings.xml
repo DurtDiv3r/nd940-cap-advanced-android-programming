@@ -3,5 +3,8 @@
     <string name="app_name">Political Preparedness</string>
 
     <!-- TODO: Add necessary string values -->
+    <string name="follow_election">Follow</string>
+    <string name="unfollow_election">Un Follow</string>
+
 
 </resources>
