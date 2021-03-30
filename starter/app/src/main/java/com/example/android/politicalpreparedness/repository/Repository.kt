@@ -10,7 +10,6 @@ import com.example.android.politicalpreparedness.network.models.ElectionResponse
 import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 
 class Repository(private val db: ElectionDao) {
@@ -24,13 +23,14 @@ class Repository(private val db: ElectionDao) {
             val elections: List<Election>
             val electionNetworkResult: ElectionResponse = CivicsApi.retrofitService.getElections().await()
             elections = electionNetworkResult.elections
-
-                elections.forEach{
-                    val dbElection = db.getElectionById(it.id)
-                    if (dbElection != null) {
-                        it.isElectionSaved = dbElection.value!!.isElectionSaved!!
+            val saved = savedElections.value
+            elections.forEach { election ->
+                saved?.forEach { followed ->
+                    if (election.id == followed.id) {
+                        election.isElectionSaved = followed.isElectionSaved
                     }
                 }
+            }
             db.insertElections(elections)
         }
     }
@@ -40,11 +40,11 @@ class Repository(private val db: ElectionDao) {
     suspend fun getVoterInfo(electionId: Int, address: String) {
         try {
             withContext(Dispatchers.IO) {
-                val voterInfoResponse: VoterInfoResponse = CivicsApi.retrofitService.getVoterInfo(electionId, address).await()
+                val voterInfoResponse: VoterInfoResponse = CivicsApi.retrofitService.getVoterInfoAsync(electionId, address).await()
                 voterInfo.postValue(voterInfoResponse)
             }
         } catch (e: Exception) {
-            Log.e("ERROR:","Error getting voter info: $e")
+            Log.e("ERROR:", "Error getting voter info: $e")
         }
     }
 

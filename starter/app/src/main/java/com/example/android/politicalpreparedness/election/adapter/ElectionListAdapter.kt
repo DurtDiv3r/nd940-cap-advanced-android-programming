@@ -14,8 +14,6 @@ class ElectionListAdapter(private val clickListener: ElectionListener) : ListAda
         return ElectionViewHolder.from(parent)
     }
 
-    //TODO: Bind ViewHolder
-
     override fun onBindViewHolder(holder: ElectionViewHolder, position: Int) {
         val election = getItem(position)
         holder.itemView.setOnClickListener {
@@ -23,11 +21,8 @@ class ElectionListAdapter(private val clickListener: ElectionListener) : ListAda
         }
         holder.bind(election)
     }
-
-    //TODO: Add companion object to inflate ViewHolder (from)
 }
 
-//TODO: Create ElectionViewHolder
 class ElectionViewHolder(private val binding: ElectionItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
     fun bind(election: Election) {
@@ -43,11 +38,9 @@ class ElectionViewHolder(private val binding: ElectionItemBinding) :
         }
     }
 }
-//TODO: Create ElectionDiffCallback
 
-//TODO: Create ElectionListener
-class ElectionListener(val clickListener: (Election) -> Unit) {
-    fun onClick(election: Election) = clickListener(election)
+class ElectionListener(val listener: (Election) -> Unit) {
+    fun onClick(election: Election) = listener(election)
 }
 
 class ElectionDiffCallback : DiffUtil.ItemCallback<Election>() {

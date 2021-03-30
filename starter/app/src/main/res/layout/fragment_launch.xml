@@ -15,38 +15,39 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
-        <!-- TODO: Add image for home screen logo. -->
         <ImageView
             android:id="@+id/ballot_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Ballot Image"
+            android:contentDescription="@string/ballot_image"
             android:src="@drawable/ballot_logo"
             app:layout_constraintBottom_toBottomOf="@id/upcomingButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- TODO: Add Button to navigate to upcoming elections. -->
-
         <Button
             android:id="@+id/upcomingButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Upcoming Elections"
+            android:text="@string/upcoming_elections"
+            android:layout_margin="@dimen/default_padding"
             android:onClick="@{()-> viewModel.onUpcomingElectionsButtonClicked()}"
             app:layout_constraintBottom_toTopOf="@id/representativeButton"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-
-        <!-- TODO: Add Button to navigate to representatives. -->
         <Button
             android:id="@+id/representativeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Find my Representative"
+            android:layout_margin="@dimen/default_padding"
+            android:text="@string/find_my_representatives"
             android:onClick="@{()-> viewModel.onRepresentativeButtonClicked()}"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

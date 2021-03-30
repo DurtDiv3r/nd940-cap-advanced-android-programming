@@ -16,9 +16,7 @@ class LaunchFragment : Fragment() {
 
     private lateinit var viewModel: LaunchViewModel
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentLaunchBinding.inflate(inflater)
         binding.lifecycleOwner = this
         viewModel = ViewModelProvider(this).get(LaunchViewModel::class.java)
@@ -35,7 +33,6 @@ class LaunchFragment : Fragment() {
                 viewModel.navigateToFragmentDone()
             }
         }
-
         return binding.root
     }
 

@@ -3,6 +3,7 @@ package com.example.android.politicalpreparedness.election
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,28 +28,23 @@ class VoterInfoFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val binding: FragmentVoterInfoBinding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.fragment_voter_info,
-                container,
-                false)
+        val binding: FragmentVoterInfoBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_voter_info, container, false)
         val application = requireNotNull(this.activity).application
         val dataSource = ElectionDatabase.getInstance(application).electionDao
 
         viewModelFactory = VoterInfoViewModelFactory(dataSource)
         viewModel = ViewModelProvider(this, viewModelFactory).get(VoterInfoViewModel::class.java)
-        binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         val election = args.argElection
-
         viewModel.getElectionById(election.id)
 
         try {
             viewModel.getVoterInfo(args)
         } catch (e: Exception) {
-
+            Log.e(VoterInfoFragment::class.java.simpleName, "Error getting voter info $e")
         }
 
         viewModel.voterUrl.observe(viewLifecycleOwner, Observer {
@@ -58,24 +54,8 @@ class VoterInfoFragment : Fragment() {
 
         return binding.root
 
-
-        //TODO: Add ViewModel values and create ViewModel
-
-        //TODO: Add binding values
-
-        //TODO: Populate voter info -- hide views without provided data.
         /**
         Hint: You will need to ensure proper data is provided from previous fragment.
-        */
-
-
-        //TODO: Handle loading of URLs
-
-        //TODO: Handle save button UI state
-        //TODO: cont'd Handle save button clicks
-
+         */
     }
-
-    //TODO: Create method to load URL intents
-
 }

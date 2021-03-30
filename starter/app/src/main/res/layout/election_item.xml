@@ -10,25 +10,29 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_padding">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/election_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{election.name}"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            android:layout_marginStart="@dimen/default_padding"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/election_day"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/election_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_padding"
             android:text="@{election.electionDay.toString()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/election_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
