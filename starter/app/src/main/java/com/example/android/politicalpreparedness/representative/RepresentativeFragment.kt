@@ -165,7 +165,7 @@ class DetailFragment : Fragment() {
                 .map { address ->
                     if (address.countryCode != "US") {
                         displaySnackbar(requireView(), getString(R.string.valid_address))
-                        null
+                        Address("", "", "", "", "")
                     } else {
                         Address(address.thoroughfare, address.subThoroughfare, address.locality, address.adminArea, address.postalCode)
                     }
